@@ -2,7 +2,15 @@ const Student = require("../models/studentModel");
 const mongoose = require("mongoose");
 
 const getStudent = async (req, res) => {
-  const student = await Student.find({}).sort({ created_at: -1 });
+  const { id } = req.params;
+
+  const student = await Student.find({ student_id: id });
+  console.log(student);
+  if (!student.length) {
+    return res.status(404).json({ error: "No such student" });
+  }
+
+  //const student = await Student.find({}).sort({ created_at: -1 });
 
   res.status(200).json(student);
 };

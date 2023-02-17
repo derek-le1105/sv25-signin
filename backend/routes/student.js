@@ -5,8 +5,8 @@ const {
 } = require("../controllers/studentController");
 const router = express.Router();
 
-router.get("/", getStudent);
+router.get("/:id", getStudent);
 
-router.post("/", createStudent);
+router.post("/login", createStudent);
 
 module.exports = router;
