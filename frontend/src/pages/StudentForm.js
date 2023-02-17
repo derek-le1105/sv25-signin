@@ -9,7 +9,8 @@ import FloatingLabel from "react-bootstrap//FloatingLabel";
 
 const StudentForm = () => {
   const [id, setID] = useState("");
-  const { student, isLoading, error, exists, name } = useStudent();
+  const { student, isLoading, error, exists, name, professors } = useStudent();
+  const { entry, isLoading: entryLoading, error: entryError } = useEntry();
   const { idInputted, setIDInputted } = useState(false);
 
   const reasonList = [
@@ -63,7 +64,17 @@ const StudentForm = () => {
                 })}
               </Form.Select>
             </FloatingLabel>
-
+            <FloatingLabel label="Professor: " className="mb-3">
+              <Form.Select aria-label="Default select example">
+                {professors.map((professor, index) => {
+                  return (
+                    <option value={professor} key={index}>
+                      {professor}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </FloatingLabel>
             <Button variant="primary" type="submit">
               Submit
             </Button>

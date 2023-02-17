@@ -5,6 +5,7 @@ export const useStudent = () => {
   const [isLoading, setIsLoading] = useState(null);
   const [exists, setExists] = useState(null);
   const [name, setName] = useState(null);
+  const [professors, setProfessors] = useState(null);
 
   const student = async (id) => {
     setIsLoading(true);
@@ -28,8 +29,9 @@ export const useStudent = () => {
       setIsLoading(true);
       setExists(true);
       setName(json[0].name.split(" ")[0]);
+      setProfessors(json[0].professors);
     }
   };
 
-  return { student, isLoading, error, exists, name };
+  return { student, isLoading, error, exists, name, professors };
 };
