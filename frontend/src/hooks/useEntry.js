@@ -25,7 +25,8 @@ export const useEntry = () => {
       setError(json.error);
     }
     if (response.ok) {
-      setIsLoading(true);
+      setIsLoading(false);
+      return response.ok;
     }
   };
 

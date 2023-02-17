@@ -7,8 +7,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap//FloatingLabel";
 
-const SignupForm = ({ id, reasonList }) => {
-  const { isLoading, error, createStudent } = useStudent();
+const SignupForm = ({ id, reasonList, setExists }) => {
+  const { isLoading, createStudent } = useStudent({ setExists });
   const { entry } = useEntry();
 
   const [name, setName] = useState(null);
@@ -17,9 +17,12 @@ const SignupForm = ({ id, reasonList }) => {
 
   const signupSubmit = async (e) => {
     e.preventDefault();
-    console.log(professors.split(", "));
-    await createStudent(id, name, professors.split(", "));
-    await entry(id, name, reason, professors.split(", ")[0]);
+    const createResp = await createStudent(id, name, professors.split(", "));
+    const entryResp = await entry(id, name, reason, professors.split(", ")[0]);
+  };
+
+  const backSubmit = () => {
+    setExists(null);
   };
 
   return (
@@ -58,7 +61,10 @@ const SignupForm = ({ id, reasonList }) => {
           <br></br>
           <Form.Text muted>Example: Ah, Gimino, Hall, Smith</Form.Text>
         </FloatingLabel>
-        <Button variant="primary" type="submit">
+        <Button variant="outline-dark" onClick={backSubmit}>
+          Back
+        </Button>
+        <Button variant="primary" type="submit" disabled={isLoading}>
           Submit
         </Button>
       </Form.Group>

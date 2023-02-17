@@ -11,6 +11,7 @@ export const useStudent = ({ setExists }) => {
     setError(null);
     if (id === "") {
       setError("Input cannot be empty");
+      setIsLoading(false);
       return;
     }
 
@@ -24,21 +25,19 @@ export const useStudent = ({ setExists }) => {
     const json = await response.json();
 
     if (!response.ok) {
-      setIsLoading(false);
       setError(json.error);
       setExists(null);
     }
     if (response.ok) {
-      if (!json) {
-        setIsLoading(false);
-        setExists(false);
-      } else {
-        setIsLoading(false);
+      if (!json) setExists(false);
+      else {
+        setName(json.name.split(" ")[0]);
+        setProfessors(json.professors);
         setExists(true);
-        setName(json[0].name.split(" ")[0]);
-        setProfessors(json[0].professors);
       }
     }
+
+    setIsLoading(false);
   };
 
   const createStudent = async (student_id, name, professors) => {

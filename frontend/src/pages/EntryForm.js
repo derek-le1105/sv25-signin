@@ -6,15 +6,19 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap//FloatingLabel";
 
-const EntryForm = ({ id, name, reasonList, professors }) => {
-  const { entry, isLoading, error } = useEntry();
+const EntryForm = ({ id, name, reasonList, professors, setExists }) => {
+  const { entry, isLoading } = useEntry();
 
   const [reason, setReason] = useState(reasonList[0]);
   const [professor, setProfessor] = useState(professors[0]);
 
   const entrySubmit = async (e) => {
     e.preventDefault();
-    await entry(id, name, reason, professor);
+    const entryResp = await entry(id, name, reason, professor);
+  };
+
+  const backSubmit = () => {
+    setExists(null);
   };
 
   return (
@@ -51,6 +55,9 @@ const EntryForm = ({ id, name, reasonList, professors }) => {
             })}
           </Form.Select>
         </FloatingLabel>
+        <Button variant="outline-dark" onClick={backSubmit}>
+          Back
+        </Button>
         <Button variant="primary" type="submit" disabled={isLoading}>
           Submit
         </Button>
