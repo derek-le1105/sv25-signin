@@ -7,4 +7,10 @@ const studentModel = new Schema({
   professors: { type: Array, required: true },
 });
 
+studentModel.statics.getStudent = async function ({ id }) {
+  if (id === "null") throw Error("ID must be filled please");
+  const student = await this.findOne({ student_id: id });
+  return student;
+};
+
 module.exports = mongoose.model("Student", studentModel);

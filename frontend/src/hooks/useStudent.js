@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-export const useStudent = () => {
+export const useStudent = ({ setExists }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const [exists, setExists] = useState(null);
   const [name, setName] = useState(null);
   const [professors, setProfessors] = useState(null);
 
   const getStudent = async (id) => {
     setIsLoading(true);
     setError(null);
+    if (id === "") {
+      setError("Input cannot be empty");
+      return;
+    }
 
     const response = await fetch(`/api/student/${id}`, {
       method: "GET",
@@ -19,17 +22,22 @@ export const useStudent = () => {
     });
 
     const json = await response.json();
-    console.log(json[0]);
+
     if (!response.ok) {
       setIsLoading(false);
       setError(json.error);
-      setExists(false);
+      setExists(null);
     }
     if (response.ok) {
-      setIsLoading(true);
-      setExists(true);
-      setName(json[0].name.split(" ")[0]);
-      setProfessors(json[0].professors);
+      if (!json) {
+        setIsLoading(false);
+        setExists(false);
+      } else {
+        setIsLoading(false);
+        setExists(true);
+        setName(json[0].name.split(" ")[0]);
+        setProfessors(json[0].professors);
+      }
     }
   };
 
@@ -52,7 +60,8 @@ export const useStudent = () => {
       setError(json.error);
     }
     if (response.ok) {
-      setIsLoading(true);
+      setIsLoading(false);
+      return response.ok;
     }
   };
 
@@ -60,7 +69,6 @@ export const useStudent = () => {
     getStudent,
     isLoading,
     error,
-    exists,
     name,
     professors,
     createStudent,

@@ -10,11 +10,13 @@ import EntryForm from "./EntryForm";
 import SignupForm from "./SignupForm";
 
 const StudentForm = () => {
-  const { getStudent, isLoading, error, exists, name, professors } =
-    useStudent();
+  const [exists, setExists] = useState(null);
+  const [id, setID] = useState(null);
+  const [response, setResponse] = useState(false);
 
-  const [id, setID] = useState("");
-
+  const { getStudent, isLoading, error, name, professors } = useStudent({
+    setExists,
+  });
   const reasonList = [
     "Homework/Study",
     "Office Hours",
@@ -30,7 +32,7 @@ const StudentForm = () => {
 
   return (
     <>
-      {exists === null && (
+      {exists === null && !response && (
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <FloatingLabel label="ID Number" className="mb-3">
@@ -38,9 +40,12 @@ const StudentForm = () => {
                 type="text"
                 onChange={(e) => setID(e.target.value)}
                 placeholder="ID Number"
+                value={id === null ? "" : id}
               />
+              <Form.Text muted>{error}</Form.Text>
             </FloatingLabel>
           </Form.Group>
+
           <Button variant="primary" type="submit" disabled={isLoading}>
             Submit
           </Button>
@@ -52,9 +57,12 @@ const StudentForm = () => {
           name={name}
           reasonList={reasonList}
           professors={professors}
+          setExists={setExists}
         />
       )}
-      {exists === false && <SignupForm id={id} reasonList={reasonList} />}
+      {exists === false && (
+        <SignupForm id={id} reasonList={reasonList} setExists={setExists} />
+      )}
     </>
   );
 };

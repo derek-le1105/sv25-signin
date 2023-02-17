@@ -3,16 +3,12 @@ const mongoose = require("mongoose");
 
 const getStudent = async (req, res) => {
   const { id } = req.params;
-
-  const student = await Student.find({ student_id: id });
-  console.log(student);
-  if (!student.length) {
-    return res.status(404).json({ error: "No such student" });
+  try {
+    const student = await Student.getStudent({ id });
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
   }
-
-  //const student = await Student.find({}).sort({ created_at: -1 });
-
-  res.status(200).json(student);
 };
 
 const createStudent = async (req, res) => {
