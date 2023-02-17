@@ -2,7 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const loginRoutes = require("./routes/logins.js");
+const entriesRoutes = require("./routes/entries");
+const studentsRoutes = require("./routes/student");
 
 mongoose.set("strictQuery", true);
 
@@ -17,7 +18,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/logins", loginRoutes);
+app.use("/api/entries", entriesRoutes);
+app.use("/api/student", studentsRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
