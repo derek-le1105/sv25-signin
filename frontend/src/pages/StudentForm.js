@@ -1,17 +1,19 @@
 import { useState } from "react";
 
 import { useStudent } from "../hooks/useStudent";
-import { useEntry } from "../hooks/useEntry";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap//FloatingLabel";
 
+import EntryForm from "./EntryForm";
+import SignupForm from "./SignupForm";
+
 const StudentForm = () => {
+  const { getStudent, isLoading, error, exists, name, professors } =
+    useStudent();
+
   const [id, setID] = useState("");
-  const { student, isLoading, error, exists, name, professors } = useStudent();
-  const { entry, isLoading: entryLoading, error: entryError } = useEntry();
-  const { idInputted, setIDInputted } = useState(false);
 
   const reasonList = [
     "Homework/Study",
@@ -23,12 +25,7 @@ const StudentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await student(id);
-    setIDInputted(true);
-  };
-
-  const entrySubmit = async (e) => {
-    e.preventDefault();
+    await getStudent(id);
   };
 
   return (
@@ -50,38 +47,14 @@ const StudentForm = () => {
         </Form>
       )}
       {exists === true && (
-        <Form onSubmit={entrySubmit}>
-          <Form.Group className="mb-3">
-            <h2>{`Welcome ${name}`}</h2>
-            <FloatingLabel label="Reason for coming here:" className="mb-3">
-              <Form.Select aria-label="Default select example">
-                {reasonList.map((reason, index) => {
-                  return (
-                    <option value={reason} key={index}>
-                      {reason}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </FloatingLabel>
-            <FloatingLabel label="Professor: " className="mb-3">
-              <Form.Select aria-label="Default select example">
-                {professors.map((professor, index) => {
-                  return (
-                    <option value={professor} key={index}>
-                      {professor}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </FloatingLabel>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form.Group>
-        </Form>
+        <EntryForm
+          id={id}
+          name={name}
+          reasonList={reasonList}
+          professors={professors}
+        />
       )}
-      {exists === false && <span>asdfaaf</span>}
+      {exists === false && <SignupForm id={id} reasonList={reasonList} />}
     </>
   );
 };

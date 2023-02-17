@@ -4,16 +4,18 @@ export const useEntry = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
-  const entry = async (id) => {
+  const entry = async (student_id, name, reason, professor) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/student/login", {
+    console.log(student_id, name, reason, professor);
+
+    const response = await fetch("/api/entries/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ student_id, name, reason, professor }),
     });
 
     const json = await response.json();
