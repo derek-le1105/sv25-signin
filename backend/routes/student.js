@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get("/:id", getStudent);
 
-router.post("/login", createStudent);
+router.post("/create", createStudent);
 
 module.exports = router;

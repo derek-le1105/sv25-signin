@@ -7,7 +7,7 @@ export const useStudent = () => {
   const [name, setName] = useState(null);
   const [professors, setProfessors] = useState(null);
 
-  const student = async (id) => {
+  const getStudent = async (id) => {
     setIsLoading(true);
     setError(null);
 
@@ -33,5 +33,36 @@ export const useStudent = () => {
     }
   };
 
-  return { student, isLoading, error, exists, name, professors };
+  const createStudent = async (student_id, name, professors) => {
+    setIsLoading(true);
+    setError(null);
+
+    const response = await fetch("/api/student/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ student_id, name, professors }),
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(json.error);
+    }
+    if (response.ok) {
+      setIsLoading(true);
+    }
+  };
+
+  return {
+    getStudent,
+    isLoading,
+    error,
+    exists,
+    name,
+    professors,
+    createStudent,
+  };
 };
