@@ -31,7 +31,7 @@ const StudentForm = () => {
   };
 
   return (
-    <>
+    <div className="login-container">
       {exists === null && (
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
@@ -75,7 +75,7 @@ const StudentForm = () => {
           setExists={setExists}
         />
       )}
-    </>
+    </div>
   );
 };
 
