@@ -8,7 +8,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap//FloatingLabel";
 import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 
 import asyncTimeout from "../asyncTimeout";
 
@@ -83,12 +84,18 @@ const SignupForm = ({ id, reasonList, setID, setExists }) => {
               <br></br>
               <Form.Text muted>Example: Ah, Gimino, Hall, Smith</Form.Text>
             </FloatingLabel>
-            <Button variant="outline-dark" onClick={backSubmit}>
-              Back
-            </Button>
-            <Button variant="primary" type="submit" disabled={isLoading}>
-              Submit
-            </Button>
+            <ButtonToolbar className="float-end">
+              <ButtonGroup className="me-2" aria-label="First group">
+                <Button variant="outline-dark" onClick={backSubmit}>
+                  Back
+                </Button>
+              </ButtonGroup>
+              <ButtonGroup className="me-2" aria-label="First group">
+                <Button variant="primary" type="submit" disabled={isLoading}>
+                  Submit
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
           </Form.Group>
         </Form>
       )}
