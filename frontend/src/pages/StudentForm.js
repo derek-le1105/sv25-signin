@@ -1,10 +1,10 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { useStudent } from "../hooks/useStudent";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FloatingLabel from "react-bootstrap//FloatingLabel";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Image from "react-bootstrap/Image";
 
 import EntryForm from "./EntryForm";
 import SignupForm from "./SignupForm";
@@ -32,12 +32,18 @@ const StudentForm = () => {
 
   return (
     <>
-      {exists === null && !response && (
+      {exists === null && (
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
+            <Image
+              src="https://pasadena.edu/academics/support/success-centers/stem-centers/images/success-center_STEM.png"
+              rounded
+              fluid
+              className="mb-3"
+            />
             <FloatingLabel label="ID Number" className="mb-3">
               <Form.Control
-                type="text"
+                type="number"
                 onChange={(e) => setID(e.target.value)}
                 placeholder="ID Number"
                 value={id === null ? "" : id}
@@ -57,11 +63,17 @@ const StudentForm = () => {
           name={name}
           reasonList={reasonList}
           professors={professors}
+          setID={setID}
           setExists={setExists}
         />
       )}
       {exists === false && (
-        <SignupForm id={id} reasonList={reasonList} setExists={setExists} />
+        <SignupForm
+          id={id}
+          reasonList={reasonList}
+          setID={setID}
+          setExists={setExists}
+        />
       )}
     </>
   );
