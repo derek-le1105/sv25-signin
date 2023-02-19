@@ -8,7 +8,6 @@ const createToken = (_id) => {
 // login user
 const loginAdmin = async (req, res) => {
   const { username, password } = req.body;
-  console.log("here");
   try {
     const user = await Admin.login(username, password);
 

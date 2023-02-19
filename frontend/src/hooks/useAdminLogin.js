@@ -9,7 +9,6 @@ export const useAdminLogin = () => {
   const login = async (username, password) => {
     setIsLoading(true);
     setError(null);
-    console.log("use");
     const response = await fetch("/api/admin/login", {
       method: "POST",
       headers: {
