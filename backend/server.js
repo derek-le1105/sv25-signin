@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const entriesRoutes = require("./routes/entries");
 const studentsRoutes = require("./routes/student");
+const adminRoutes = require("./routes/admin");
 
 mongoose.set("strictQuery", true);
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 app.use("/api/entries", entriesRoutes);
 app.use("/api/student", studentsRoutes);
+app.use("/api/admin", adminRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)

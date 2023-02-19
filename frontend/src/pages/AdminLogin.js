@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useAdminLogin } from "../hooks/useAdminLogin";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -8,8 +10,11 @@ const AdminLogin = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
+  const { login, isLoading, error } = useAdminLogin();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await login(username, password);
   };
 
   return (

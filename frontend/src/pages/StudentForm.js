@@ -1,5 +1,9 @@
+//TODO: MAKE BUTTON FOR ADMIN LOGIN
+
 import { useState, useEffect } from "react";
 import { useStudent } from "../hooks/useStudent";
+
+import { useNavigate } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -13,6 +17,7 @@ const StudentForm = () => {
   const [exists, setExists] = useState(null);
   const [id, setID] = useState(null);
   const [response, setResponse] = useState(false);
+  const navigate = useNavigate();
 
   const { getStudent, isLoading, error, name, professors } = useStudent({
     setExists,
@@ -28,6 +33,12 @@ const StudentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await getStudent(id);
+  };
+
+  const adminButton = async (e) => {
+    console.log("admin");
+    //disable current and go to login
+    navigate("/login");
   };
 
   return (
@@ -54,6 +65,13 @@ const StudentForm = () => {
 
           <Button variant="primary" type="submit" disabled={isLoading}>
             Submit
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={adminButton}
+            disabled={isLoading}
+          >
+            Admin
           </Button>
         </Form>
       )}
