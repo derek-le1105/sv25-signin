@@ -13,19 +13,17 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="pages">
-          <Routes>
-            <Route path="/" element={<StudentForm />} />
-            <Route
-              path="/login"
-              element={!user ? <AdminLogin /> : <Navigate to="/admin" />}
-            />
-            <Route
-              path="/admin"
-              element={user ? <AdminDashboard /> : <Navigate to="/login" />}
-            />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<StudentForm />} />
+          <Route
+            path="/login"
+            element={!user ? <AdminLogin /> : <Navigate to="/admin" />}
+          />
+          <Route
+            path="/admin"
+            element={user ? <AdminDashboard /> : <Navigate to="/login" />}
+          />
+        </Routes>
       </BrowserRouter>
     </div>
   );

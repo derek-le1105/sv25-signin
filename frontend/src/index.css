@@ -1,3 +1,11 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -9,7 +17,50 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.login-container{
+body {
+  background: #f1f1f1;
+  margin: 0;
+  font-family: "Poppins";
+}
+
+header {
+  background: #fff;
+}
+
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header a {
+  color: #333;
+  text-decoration: none;
+}
+
+nav{
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 10px;
+}
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+.login{
     max-width: 400px;
     padding: 20px;
     outline: 1px solid rgb(169, 169, 169);
@@ -25,11 +76,40 @@ input[type=number] {
     height: 100vh;
 }
 
-.admin-login{
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
+.dashboard{
+  background: #f1f1f1;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+
+.entry-details{
   background: #fff;
-  outline: 1px solid rgb(169, 169, 169);
   border-radius: 4px;
+  margin: 10px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+.entry-details h4{
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+
+.entry-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.entry-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
 }

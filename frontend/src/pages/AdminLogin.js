@@ -18,30 +18,32 @@ const AdminLogin = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="admin-login">
-      <Form.Group className="mb-3">
-        <h3 className="mb-3">Administrator Log In</h3>
-        <FloatingLabel label="Username" className="mb-3">
-          <Form.Control
-            type="text"
-            label="Username"
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-          />
-        </FloatingLabel>
-        <FloatingLabel label="Password" className="mb-3">
-          <Form.Control
-            type="password"
-            label="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-        </FloatingLabel>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form.Group>
-    </Form>
+    <div className="pages">
+      <Form onSubmit={handleSubmit} className="login">
+        <Form.Group className="mb-3">
+          <h3 className="mb-3">Administrator Log In</h3>
+          <FloatingLabel label="Username" className="mb-3">
+            <Form.Control
+              type="text"
+              label="Username"
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+            />
+          </FloatingLabel>
+          <FloatingLabel label="Password" className="mb-3">
+            <Form.Control
+              type="password"
+              label="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+          </FloatingLabel>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form.Group>
+      </Form>
+    </div>
   );
 };
 

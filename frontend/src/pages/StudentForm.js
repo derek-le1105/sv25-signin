@@ -42,57 +42,59 @@ const StudentForm = () => {
   };
 
   return (
-    <div className="login-container">
-      {exists === null && (
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Image
-              src="https://pasadena.edu/academics/support/success-centers/stem-centers/images/success-center_STEM.png"
-              rounded
-              fluid
-              className="mb-3"
-            />
-            <FloatingLabel label="ID Number" className="mb-3">
-              <Form.Control
-                type="number"
-                onChange={(e) => setID(e.target.value)}
-                placeholder="ID Number"
-                value={id === null ? "" : id}
+    <div className="pages">
+      <div className="login">
+        {exists === null && (
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Image
+                src="https://pasadena.edu/academics/support/success-centers/stem-centers/images/success-center_STEM.png"
+                rounded
+                fluid
+                className="mb-3"
               />
-              <Form.Text muted>{error}</Form.Text>
-            </FloatingLabel>
-          </Form.Group>
+              <FloatingLabel label="ID Number" className="mb-3">
+                <Form.Control
+                  type="number"
+                  onChange={(e) => setID(e.target.value)}
+                  placeholder="ID Number"
+                  value={id === null ? "" : id}
+                />
+                <Form.Text muted>{error}</Form.Text>
+              </FloatingLabel>
+            </Form.Group>
 
-          <Button variant="primary" type="submit" disabled={isLoading}>
-            Submit
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={adminButton}
-            disabled={isLoading}
-          >
-            Admin
-          </Button>
-        </Form>
-      )}
-      {exists === true && (
-        <EntryForm
-          id={id}
-          name={name}
-          reasonList={reasonList}
-          professors={professors}
-          setID={setID}
-          setExists={setExists}
-        />
-      )}
-      {exists === false && (
-        <SignupForm
-          id={id}
-          reasonList={reasonList}
-          setID={setID}
-          setExists={setExists}
-        />
-      )}
+            <Button variant="primary" type="submit" disabled={isLoading}>
+              Submit
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={adminButton}
+              disabled={isLoading}
+            >
+              Admin
+            </Button>
+          </Form>
+        )}
+        {exists === true && (
+          <EntryForm
+            id={id}
+            name={name}
+            reasonList={reasonList}
+            professors={professors}
+            setID={setID}
+            setExists={setExists}
+          />
+        )}
+        {exists === false && (
+          <SignupForm
+            id={id}
+            reasonList={reasonList}
+            setID={setID}
+            setExists={setExists}
+          />
+        )}
+      </div>
     </div>
   );
 };

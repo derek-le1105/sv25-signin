@@ -2,7 +2,7 @@ const Entry = require("../models/entryModel");
 const mongoose = require("mongoose");
 
 const getEntry = async (req, res) => {
-  const entries = await Entry.find({}).sort({ createdAt: -1 });
+  const entries = await Entry.find({}).sort({ createdAt: -1 }).limit(20);
 
   res.status(200).json(entries);
 };
