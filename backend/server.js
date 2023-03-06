@@ -23,8 +23,20 @@ app.use("/api/entries", entriesRoutes);
 app.use("/api/student", studentsRoutes);
 app.use("/api/admin", adminRoutes);
 
-mongoose
+/*mongoose
   .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log("connected to db and listening on port", process.env.PORT);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+*/
+
+mongoose
+  .connect("mongodb://mongo_database:27017/pcc_data")
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log("connected to db and listening on port", process.env.PORT);
