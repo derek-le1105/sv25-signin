@@ -2,8 +2,17 @@ const Entry = require("../models/entryModel");
 const mongoose = require("mongoose");
 
 const getEntry = async (req, res) => {
-  const entries = await Entry.find({}).sort({ createdAt: -1 }).limit(20);
+  const page = req.query.page;
+  const limit = 20;
 
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const entries = await Entry.find({})
+    .sort({ createdAt: -1 })
+    .skip(startIndex)
+    .limit(limit);
+  console.log(entries);
   res.status(200).json(entries);
 };
 

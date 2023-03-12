@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import Navbar from "../components/Navbar";
 import EntryDetails from "../components/EntryDetails";
+import EntryTable from "../components/EntryTable";
 
 import { useEntriesContext } from "../hooks/useEntriesContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -12,7 +13,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchEntries = async () => {
-      const response = await fetch("/api/entries", {
+      const response = await fetch("/api/entries?page=1", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 
@@ -32,9 +33,10 @@ const AdminDashboard = () => {
     <>
       <Navbar />
       <div className="dashboard">
-        <div className="entries">
+        <EntryTable entries={entries} />
+        {/* <div className="entries">
           {entries && entries.map((entry) => <EntryDetails entry={entry} />)}
-        </div>
+        </div> */}
       </div>
     </>
   );
