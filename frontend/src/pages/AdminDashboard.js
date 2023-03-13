@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import Navbar from "../components/Navbar";
-import EntryDetails from "../components/EntryDetails";
 import EntryTable from "../components/EntryTable";
 
 import { useEntriesContext } from "../hooks/useEntriesContext";
@@ -13,7 +12,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchEntries = async () => {
-      const response = await fetch("/api/entries?page=1", {
+      const response = await fetch("/api/entries", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 
