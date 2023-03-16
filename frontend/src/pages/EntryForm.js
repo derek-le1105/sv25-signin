@@ -3,12 +3,14 @@ import { useEntry } from "../hooks/useEntry";
 
 import SuccessLogin from "./SuccessLogin";
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import FloatingLabel from "react-bootstrap//FloatingLabel";
-import Image from "react-bootstrap/Image";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import {
+  Form,
+  Button,
+  ButtonGroup,
+  ButtonToolbar,
+  Image,
+  FloatingLabel,
+} from "react-bootstrap";
 
 import asyncTimeout from "../asyncTimeout";
 

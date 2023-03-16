@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import Navbar from "../components/Navbar";
 import EntryTable from "../components/EntryTable";
+import EntryFilter from "../components/EntryFilter";
 
 import { useEntriesContext } from "../hooks/useEntriesContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -33,9 +34,7 @@ const AdminDashboard = () => {
       <Navbar />
       <div className="dashboard">
         <EntryTable entries={entries} />
-        {/* <div className="entries">
-          {entries && entries.map((entry) => <EntryDetails entry={entry} />)}
-        </div> */}
+        <EntryFilter></EntryFilter>
       </div>
     </>
   );

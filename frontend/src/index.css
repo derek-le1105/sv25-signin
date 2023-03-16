@@ -81,6 +81,7 @@ nav button {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
+  margin: 15px;
 }
 
 .entry-details{
