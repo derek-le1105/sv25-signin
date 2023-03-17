@@ -1,20 +1,23 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useAdminLogin } from "../hooks/useAdminLogin";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { Form, Button, FloatingLabel, ButtonGroup } from "react-bootstrap";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+
+  const navigate = useNavigate();
 
   const { login, isLoading, error } = useAdminLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(username, password);
+  };
+
+  const homeSubmit = (e) => {
+    navigate("/");
   };
 
   return (
@@ -38,8 +41,12 @@ const AdminLogin = () => {
               placeholder="Password"
             />
           </FloatingLabel>
+          <Form.Text muted>{error}</Form.Text>
           <Button variant="primary" type="submit">
             Submit
+          </Button>
+          <Button variant="secondary" onClick={homeSubmit}>
+            Home
           </Button>
         </Form.Group>
       </Form>

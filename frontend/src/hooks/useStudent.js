@@ -43,6 +43,7 @@ export const useStudent = ({ setExists }) => {
   const createStudent = async (student_id, name, professors) => {
     setIsLoading(true);
     setError(null);
+    professors = !professors ? null : professors.split(", ");
 
     const response = await fetch("/api/student/create", {
       method: "POST",

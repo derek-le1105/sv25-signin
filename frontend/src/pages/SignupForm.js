@@ -4,18 +4,20 @@ import { useEntry } from "../hooks/useEntry";
 
 import SuccessLogin from "./SuccessLogin";
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import FloatingLabel from "react-bootstrap//FloatingLabel";
-import Image from "react-bootstrap/Image";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import {
+  Form,
+  Button,
+  FloatingLabel,
+  Image,
+  ButtonGroup,
+  ButtonToolbar,
+} from "react-bootstrap";
 
 import asyncTimeout from "../asyncTimeout";
 
 const SignupForm = ({ id, reasonList, setID, setExists }) => {
   const { isLoading, createStudent } = useStudent({ setExists });
-  const { entry } = useEntry();
+  const { entry, error } = useEntry();
 
   const [name, setName] = useState(null);
   const [reason, setReason] = useState(reasonList[0]);
@@ -24,8 +26,8 @@ const SignupForm = ({ id, reasonList, setID, setExists }) => {
 
   const signupSubmit = async (e) => {
     e.preventDefault();
-    const createResp = await createStudent(id, name, professors.split(", "));
-    const entryResp = await entry(id, name, reason, professors.split(", ")[0]);
+    const createResp = await createStudent(id, name, professors);
+    const entryResp = await entry(id, name, reason, professors);
     if (createResp && entryResp) {
       setResponse(true);
       await asyncTimeout({ timeout: 2000 });
@@ -84,6 +86,7 @@ const SignupForm = ({ id, reasonList, setID, setExists }) => {
               <br></br>
               <Form.Text muted>Example: Ah, Gimino, Hall, Smith</Form.Text>
             </FloatingLabel>
+            <Form.Text muted>{error}</Form.Text>
             <ButtonToolbar className="float-end">
               <ButtonGroup className="me-2" aria-label="First group">
                 <Button variant="outline-dark" onClick={backSubmit}>
