@@ -1,0 +1,43 @@
+version: "3.8"
+services: 
+  frontend:
+    build: ./frontend
+    container_name: frontend_c
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - mern-network
+    volumes:
+      - ./frontend:/app
+
+  backend:
+    build: ./backend
+    container_name: backend_c
+    ports: 
+      - '4000:4000'
+    networks:
+      - mern-network
+
+  mongo_database:
+    image:  mongo:latest
+    container_name: mongodb_c
+    restart: always
+    volumes:
+      -  mongo-data:/data/db #mongo-data is name of volume, /data/db is path where file/directory are mounted in container
+    ports:
+      - "27017:27017"
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
+  
