@@ -15,7 +15,7 @@ import {
 import asyncTimeout from "../asyncTimeout";
 
 const EntryForm = ({ id, name, reasonList, professors, setID, setExists }) => {
-  const { entry, isLoading } = useEntry();
+  const { entry, isLoading, error } = useEntry();
 
   const [reason, setReason] = useState(reasonList[0]);
   const [professor, setProfessor] = useState(professors[0]);
@@ -77,6 +77,7 @@ const EntryForm = ({ id, name, reasonList, professors, setID, setExists }) => {
                 })}
               </Form.Select>
             </FloatingLabel>
+            <Form.Text muted>{error}</Form.Text>
             <ButtonToolbar className="float-end">
               <ButtonGroup className="me-2" aria-label="First group">
                 <Button variant="outline-dark" onClick={backSubmit}>

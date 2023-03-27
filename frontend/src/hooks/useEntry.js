@@ -9,6 +9,7 @@ export const useEntry = () => {
     setError(null);
 
     console.log(student_id, name, reason, professor);
+    professor = !professor ? null : professor.split(", ")[0];
 
     const response = await fetch("/api/entries/login", {
       method: "POST",
