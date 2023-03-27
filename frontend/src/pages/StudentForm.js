@@ -7,6 +7,7 @@ import EntryForm from "./EntryForm";
 import SignupForm from "./SignupForm";
 
 const StudentForm = () => {
+  const [validated, setValidated] = useState(false);
   const [exists, setExists] = useState(null);
   const [id, setID] = useState(null);
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const StudentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await getStudent(id);
+    setValidated(true);
   };
 
   const adminButton = (e) => {
@@ -37,7 +39,7 @@ const StudentForm = () => {
         {
           /*for initial display and when user inputs empty*/
           exists === null && (
-            <Form onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Form.Group className="mb-3">
                 <Image
                   src="https://pasadena.edu/academics/support/success-centers/stem-centers/images/success-center_STEM.png"
@@ -51,8 +53,11 @@ const StudentForm = () => {
                     onChange={(e) => setID(e.target.value)}
                     placeholder="ID Number"
                     value={id === null ? "" : id}
+                    required
                   />
-                  <Form.Text muted>{error}</Form.Text>
+                  <Form.Control.Feedback type="invalid">
+                    Please input a valid ID number
+                  </Form.Control.Feedback>
                 </FloatingLabel>
               </Form.Group>
 
