@@ -28,7 +28,7 @@ const EntryTable = ({ entries }) => {
   }, [entries, page]);
 
   return (
-    <>
+    <div className="entry-details">
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -71,7 +71,7 @@ const EntryTable = ({ entries }) => {
           </Button>
         </caption>
       </Table>
-    </>
+    </div>
   );
 };
 
