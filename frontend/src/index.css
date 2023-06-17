@@ -27,17 +27,36 @@ header {
   background: #fff;
 }
 
-header .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
+.navbar {
+  background-color: #f1f1f1;
+  width: 15%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+
+.nav-text a{
+  text-decoration: none;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding: 0 16px;
+  border-radius: 4px;
 }
-header a {
+
+.navbar a {
   color: #333;
   text-decoration: none;
+}
+
+.navbar-options{
+  width: 100%;
 }
 
 nav{
@@ -45,10 +64,7 @@ nav{
   align-items: center;
 }
 
-nav a {
-  margin-left: 10px;
-}
-nav button {
+button {
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);
@@ -76,10 +92,13 @@ nav button {
     height: 100vh;
 }
 
+.admin-dashboard{
+  display: flex;
+}
+
 .dashboard{
   background: #f1f1f1;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
   gap: 100px;
   margin: 15px;
 }
@@ -91,6 +110,7 @@ nav button {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  width: 100%;
 }
 
 .entry-details h4{

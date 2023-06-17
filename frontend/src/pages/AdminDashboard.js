@@ -30,13 +30,10 @@ const AdminDashboard = () => {
   }, [dispatch, user]);
 
   return (
-    <>
+    <div className="admin-dashboard">
       <Navbar />
-      <div className="dashboard">
-        <EntryTable entries={entries} />
-        <EntryFilter></EntryFilter>
-      </div>
-    </>
+      <EntryTable entries={entries} />
+    </div>
   );
 };
 
